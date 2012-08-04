@@ -12,7 +12,16 @@ setup(
     author = 'Praekelt Foundation',
     author_email = 'dev@praekeltfoundation.org',
     packages = find_packages(),
-    install_requires = ['setuptools'],
+    dependency_links = [
+        'http://github.com/praekelt/django-photologue/tarball/2.6.praekelt#egg=django-photologue-2.6.praekelt',
+        'http://github.com/praekelt/django-photologue/tarball/2.7.praekelt#egg=django-photologue-2.7.praekelt',
+    ],
+    install_requires = [
+        'Pillow',
+        'Django>=1.4',
+        'django-photologue>=2.6.praekelt',
+        'setuptools',
+    ],
     classifiers = [
         'Development Status :: 1 - Beta',
         'Intended Audience :: Developers',

@@ -4,9 +4,10 @@ from django.contrib.comments.managers import CommentManager
 from django.contrib.comments.moderation import CommentModerator
 from django.contrib.comments.signals import comment_was_flagged
 from django.contrib.auth.models import User
+from photologue.models import ImageModel
 
 
-class UserComment(BaseCommentAbstractModel):
+class UserComment(BaseCommentAbstractModel, ImageModel):
     parent = models.ForeignKey('self', blank=True, null=True, related_name='children')
     user = models.ForeignKey(User, related_name='comments') # user is always required
     comment = models.TextField(max_length=3000)
