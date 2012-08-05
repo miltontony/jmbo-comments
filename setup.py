@@ -14,6 +14,14 @@ setup(
     packages = find_packages(),
     install_requires = [
         'setuptools',
+        'django-nose',
+        'django-category',
+        'django-dirtyfields',
+        'South==0.7.3',
+        'django_ckeditor-dev',
+    ],
+    dependency_links = [
+        'https://github.com/dwaiter/django-ckeditor/tarball/master#egg=django_ckeditor-dev',
     ],
     classifiers = [
         'Development Status :: 1 - Beta',
