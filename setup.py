@@ -5,21 +5,14 @@ def listify(filename):
 
 setup(
     name = "jmbo-comments",
-    version = "0.0.1",
+    version = "0.0.2",
     url = 'http://github.com/praekelt/jmbo-comments',
     license = 'BSD',
-    description = 'Comments module based on YAL',
+    description = 'Comments module based on jmbo-comments',
     author = 'Praekelt Foundation',
     author_email = 'dev@praekeltfoundation.org',
     packages = find_packages(),
-    dependency_links = [
-        'http://github.com/praekelt/django-photologue/tarball/2.6.praekelt#egg=django-photologue-2.6.praekelt',
-        'http://github.com/praekelt/django-photologue/tarball/2.7.praekelt#egg=django-photologue-2.7.praekelt',
-    ],
     install_requires = [
-        'Pillow',
-        'Django>=1.4',
-        'django-photologue>=2.6.praekelt',
         'setuptools',
     ],
     classifiers = [
