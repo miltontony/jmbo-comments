@@ -6,7 +6,7 @@ from jmbocomments.models import UserComment, REPORT_CATEGORY_CHOICES
 
 class UserCommentForm(CommentForm):
     email = forms.EmailField(required=False)
-    category = forms.IntegerField(required=False,\
+    category = forms.IntegerField(required=True,\
                 widget=forms.RadioSelect(choices=REPORT_CATEGORY_CHOICES))
 
 
