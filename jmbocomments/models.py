@@ -6,7 +6,19 @@ from django.contrib.comments.signals import comment_was_flagged
 from django.contrib.auth.models import User
 
 
+REPORT_CATEGORY_CHOICES = (
+        (0, 'Maintenance'),
+        (1, 'Abuse'),
+        (2, 'Textbooks'),
+        (3, 'Crime'),
+        (4, 'Bullying'),
+        )
+
+
 class UserComment(BaseCommentAbstractModel):
+    category = models.PositiveIntegerField(choices=REPORT_CATEGORY_CHOICES,
+                                            null=False, blank=False, default=0)
+
     parent = models.ForeignKey('self', blank=True, null=True, related_name='children')
     user = models.ForeignKey(User, related_name='comments') # user is always required
     comment = models.TextField(max_length=3000)

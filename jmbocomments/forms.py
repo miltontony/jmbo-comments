@@ -1,11 +1,14 @@
 from django.contrib.comments.forms import CommentForm
 from django import forms
 
-from jmbocomments.models import UserComment
+from jmbocomments.models import UserComment, REPORT_CATEGORY_CHOICES
 
 
 class UserCommentForm(CommentForm):
-    email = forms.EmailField(required=False) # overriden, YAL users don't have email only MSISDN.
+    email = forms.EmailField(required=False)
+    category = forms.IntegerField(required=False,\
+                widget=forms.RadioSelect(choices=REPORT_CATEGORY_CHOICES))
+
 
     def get_comment_model(self):
         # this is not really needed anymore, as was used by function below.
