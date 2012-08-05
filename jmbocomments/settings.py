@@ -142,15 +142,8 @@ INSTALLED_APPS = (
     'ckeditor',
     #'registration',
     #'haystack',
-
-    # yal
-    'jmboarticles',
-    'jmboarticles.video',
-    'jmboarticles.poll',
-    'jmboarticles.featured',
     #'chat',
     #'accounts',
-    'downloads',
 
     #jmbo
     'category',
