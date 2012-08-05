@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.comments.models import BaseCommentAbstractModel
 from django.contrib.comments.managers import CommentManager
-from django.contrib.comments.moderation import CommentModerator
-from django.contrib.comments.signals import comment_was_flagged
 from django.contrib.auth.models import User
 
 
@@ -53,6 +51,7 @@ class UserComment(BaseCommentAbstractModel):
     def __unicode__(self):
         return '%s: %s...' % (self.user, self.comment[:50])
 
+
 class UserCommentFlag(models.Model):
     # Constants for flag types
     SUGGEST_REMOVAL = "removal suggestion"
@@ -61,7 +60,7 @@ class UserCommentFlag(models.Model):
     MODERATOR_APPROVAL = "moderator approval"
 
     comment = models.ForeignKey(UserComment, related_name='flag_set')
-    flag = models.CharField('flag', choices=((opt,opt) for opt in [
+    flag = models.CharField('flag', choices=((opt, opt) for opt in [
             SUGGEST_REMOVAL,
             COMMUNITY_REMOVAL,
             MODERATOR_DELETION,
@@ -78,25 +77,3 @@ class UserCommentFlag(models.Model):
 
     def __unicode__(self):
         return 'Flagged comment'
-
-
-class UserCommentModerator(CommentModerator):
-
-    def check_for_duplicate_comment_submission(self, comment, content_type,
-                                        object_pk, user):
-        """
-        Before saving to the db check if we've already written a comment
-        for this user with content_type & object_pk with the exact same
-        comment text. If so, have the signal return False so it isn't written
-        to the database to prevent duplication submissions.
-        """
-        if user.is_anonymous():
-            return False
-        else:
-            comments = UserComment.objects.filter(user=user,
-                content_type=content_type, object_pk=object_pk)
-            if comments.exists():
-                return comments.latest('submit_date').comment != comment.comment
-            else:
-                return True
-
