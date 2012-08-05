@@ -44,6 +44,9 @@ class UserComment(BaseCommentAbstractModel):
     def is_moderated(self):
         return self.moderation_flags().exists()
 
+    def get_category(self):
+        return dict(REPORT_CATEGORY_CHOICES)[self.category]
+
     class Meta:
         verbose_name = 'comment'
         verbose_name_plural = 'comments'
