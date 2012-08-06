@@ -2,10 +2,9 @@ from django.contrib.comments.forms import CommentForm
 from django import forms
 
 from jmbocomments.models import UserComment, REPORT_CATEGORY_CHOICES
-from jmbocomments.forms import UserCommentForm
 
 
-class UserCommentForm(UserCommentForm):
+class UserCommentForm(CommentForm):
     email = forms.EmailField(required=False)
     category = forms.IntegerField(required=True,\
                 widget=forms.RadioSelect(choices=REPORT_CATEGORY_CHOICES))
@@ -25,6 +24,7 @@ class UserCommentForm(UserCommentForm):
         del data['user_email']
         del data['user_url']
         data['like_count'] = 0
+        data['category'] = self.cleaned_data['category']
         return data
 
     def clean_timestamp(self):
